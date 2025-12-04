@@ -12,8 +12,11 @@ import {
   CheckCircle,
   XCircle,
   Wifi,
-  WifiOff
+  WifiOff,
+  Search,
+  Museum
 } from 'lucide-react';
+import { FaClock, FaMicrophone } from 'react-icons/fa';
 import { useAPI } from '../contexts/APIContext';
 import ConfigModal from './ConfigModal';
 
@@ -26,6 +29,10 @@ const Header = () => {
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/explore', label: 'Explore', icon: Compass },
+    { path: '/search', label: 'Search', icon: Search },
+    { path: '/museums', label: 'Museums', icon: Museum },
+    { path: '/timeline', label: 'Timeline', icon: FaClock },
+    { path: '/voice', label: 'Voice Guide', icon: FaMicrophone },
     { path: '/about', label: 'About', icon: Info },
   ];
 

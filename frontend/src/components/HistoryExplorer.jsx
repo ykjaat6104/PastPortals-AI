@@ -11,8 +11,7 @@ import {
   Search,
   Clock,
   ExternalLink,
-  Languages,
-  Summarize
+  Languages
 } from 'lucide-react';
 import { useAPI } from '../contexts/APIContext';
 import { useNotification } from '../contexts/NotificationContext';
@@ -268,7 +267,7 @@ const HistoryExplorer = () => {
                   className="btn btn-secondary"
                   disabled={isLoading}
                 >
-                  <Summarize className="w-4 h-4" />
+                  <FileText className="w-4 h-4" />
                   Summarize
                 </button>
               </div>

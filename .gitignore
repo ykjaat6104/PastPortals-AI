@@ -1,0 +1,57 @@
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+api_key.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# FAISS indices and data
+data/
+*.faiss
+*.index
+*.pkl
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+temp/
+
+# Images and generated content
+generated_images/
+uploads/

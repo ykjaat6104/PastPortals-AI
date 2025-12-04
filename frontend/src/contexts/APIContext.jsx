@@ -124,4 +124,28 @@ export const APIProvider = ({ children }) => {
   };
 
   const resetConfiguration = () => {
-    setApiKey('');\n    setIsConfigured(false);\n    localStorage.removeItem('museum_guide_api_key');\n    toast.success('Configuration reset');\n  };\n\n  const value = {\n    apiKey,\n    isConfigured,\n    isLoading,\n    serverStatus,\n    configureAPI,\n    askQuestion,\n    translateText,\n    summarizeText,\n    resetConfiguration,\n    checkServerHealth\n  };\n\n  return (\n    <APIContext.Provider value={value}>\n      {children}\n    </APIContext.Provider>\n  );\n};
+    setApiKey('');
+    setIsConfigured(false);
+    localStorage.removeItem('museum_guide_api_key');
+    toast.success('Configuration reset');
+  };
+
+  const value = {
+    apiKey,
+    isConfigured,
+    isLoading,
+    serverStatus,
+    configureAPI,
+    askQuestion,
+    translateText,
+    summarizeText,
+    resetConfiguration,
+    checkServerHealth
+  };
+
+  return (
+    <APIContext.Provider value={value}>
+      {children}
+    </APIContext.Provider>
+  );
+};

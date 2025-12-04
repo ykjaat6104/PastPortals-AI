@@ -59,7 +59,7 @@ export const apiService = {
   // Health check
   checkHealth: async () => {
     try {
-      const response = await api.get('/health');
+      const response = await api.get('/api/health');
       return response.data;
     } catch (error) {
       throw error;
@@ -69,7 +69,7 @@ export const apiService = {
   // Configure API key
   configureAPI: async (apiKey) => {
     try {
-      const response = await api.post('/configure', {
+      const response = await api.post('/api/configure', {
         api_key: apiKey
       });
       return response.data;
@@ -81,7 +81,7 @@ export const apiService = {
   // Ask question
   askQuestion: async (question) => {
     try {
-      const response = await api.post('/ask', {
+      const response = await api.post('/api/ask', {
         question: question
       });
       return response.data;
@@ -93,7 +93,7 @@ export const apiService = {
   // Translate text
   translateText: async (text, language) => {
     try {
-      const response = await api.post('/translate', {
+      const response = await api.post('/api/translate', {
         text: text,
         language: language
       });
@@ -104,11 +104,85 @@ export const apiService = {
   },
 
   // Summarize text
-  summarizeText: async (text) => {
+  summarizeText: async (text, length = 'medium') => {
     try {
-      const response = await api.post('/summarize', {
-        text: text
+      const response = await api.post('/api/summarize', {
+        text: text,
+        length: length
       });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get supported languages
+  getLanguages: async () => {
+    try {
+      const response = await api.get('/api/languages');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Search museums
+  searchMuseums: async (query, limit = 10) => {
+    try {
+      const response = await api.post('/api/museum/search', {
+        query: query,
+        limit: limit
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get museum collections
+  getMuseumCollections: async () => {
+    try {
+      const response = await api.get('/api/museum/collections');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get quick facts
+  getQuickFacts: async (topic) => {
+    try {
+      const response = await api.get(`/api/quick-facts/${encodeURIComponent(topic)}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get related topics
+  getRelatedTopics: async (topic) => {
+    try {
+      const response = await api.get(`/api/related/${encodeURIComponent(topic)}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get system status
+  getStatus: async () => {
+    try {
+      const response = await api.get('/api/status');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get capabilities
+  getCapabilities: async () => {
+    try {
+      const response = await api.get('/api/capabilities');
       return response.data;
     } catch (error) {
       throw error;
