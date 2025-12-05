@@ -1,0 +1,202 @@
+/* ========================================
+   SIDEBAR LAYOUT & APP STRUCTURE
+   ======================================== */
+
+.App {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+}
+
+.main-content {
+  margin-left: 280px;
+  flex: 1;
+  padding: var(--spacing-2xl);
+  min-height: 100vh;
+  transition: margin-left var(--transition-base);
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ========================================
+   SIDEBAR COMPONENT
+   ======================================== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background: var(--neutral-0);
+  border-right: 1px solid var(--neutral-200);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  transition: transform var(--transition-base);
+}
+
+.sidebar-header {
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neutral-0);
+  box-shadow: var(--shadow-md);
+}
+
+.logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-600), var(--accent-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  flex: 1;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  overflow-y: auto;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  color: var(--neutral-600);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.sidebar-nav-item:hover {
+  background: var(--neutral-100);
+  color: var(--primary-600);
+  transform: translateX(4px);
+}
+
+.sidebar-nav-item.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.sidebar-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: linear-gradient(180deg, var(--primary-500), var(--accent-500));
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--neutral-200);
+}
+
+.sidebar-settings-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  color: var(--neutral-600);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-settings-btn:hover {
+  background: var(--neutral-100);
+  color: var(--primary-600);
+}
+
+.api-status {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.api-status.configured {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-600);
+}
+
+.api-status.not-configured {
+  background: rgba(239, 68, 68, 0.1);
+  color: #DC2626;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-text {
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { apiService } from '../utils/api';
 import toast from 'react-hot-toast';
 
 const APIContext = createContext();
@@ -16,62 +15,35 @@ export const APIProvider = ({ children }) => {
   const [apiKey, setApiKey] = useState('');
   const [isConfigured, setIsConfigured] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [serverStatus, setServerStatus] = useState(null);
+  const [language, setLanguage] = useState('en');
 
   useEffect(() => {
-    // Load saved API key from localStorage
-    const savedApiKey = localStorage.getItem('museum_guide_api_key');
-    if (savedApiKey) {
-      setApiKey(savedApiKey);
-      configureAPI(savedApiKey, false);
-    }
+    // Get API key from environment
+    const envApiKey = process.env.REACT_APP_GEMINI_API_KEY;
     
-    // Check server health
-    checkServerHealth();
+    if (envApiKey) {
+      setApiKey(envApiKey);
+      setIsConfigured(true);
+    }
+
+    // Load saved language
+    const savedLanguage = localStorage.getItem('preferred_language') || 'en';
+    setLanguage(savedLanguage);
   }, []);
 
-  const checkServerHealth = async () => {
-    try {
-      const health = await apiService.checkHealth();
-      setServerStatus(health);
-      setIsConfigured(health.ai_configured);
-    } catch (error) {
-      console.error('Server health check failed:', error);
-      setServerStatus({ status: 'offline' });
-    }
+  const changeLanguage = (langCode) => {
+    setLanguage(langCode);
+    localStorage.setItem('preferred_language', langCode);
+    toast.success(`Language changed to ${getLanguageName(langCode)}`);
   };
 
-  const configureAPI = async (key, showToast = true) => {
-    if (!key?.trim()) {
-      toast.error('Please enter a valid API key');
-      return false;
-    }
-
-    setIsLoading(true);
-    try {
-      await apiService.configureAPI(key.trim());
-      setApiKey(key.trim());
-      setIsConfigured(true);
-      
-      // Save to localStorage
-      localStorage.setItem('museum_guide_api_key', key.trim());
-      
-      if (showToast) {
-        toast.success('API configured successfully!');
-      }
-      
-      // Refresh server status
-      await checkServerHealth();
-      return true;
-    } catch (error) {
-      console.error('API configuration failed:', error);
-      if (showToast) {
-        toast.error(error.message || 'Failed to configure API');
-      }
-      return false;
-    } finally {
-      setIsLoading(false);
-    }
+  const getLanguageName = (code) => {
+    const names = {
+      en: 'English', hi: 'Hindi', fr: 'French', es: 'Spanish',
+      pt: 'Portuguese', ar: 'Arabic', zh: 'Chinese', ja: 'Japanese',
+      de: 'German', it: 'Italian', ru: 'Russian', ko: 'Korean'
+    };
+    return names[code] || 'English';
   };
 
   const askQuestion = async (question) => {
@@ -79,68 +51,86 @@ export const APIProvider = ({ children }) => {
       throw new Error('Please enter a question');
     }
 
-    if (!isConfigured) {
-      throw new Error('Please configure your API key first');
+    if (!isConfigured || !apiKey) {
+      throw new Error('API key not configured');
     }
 
     setIsLoading(true);
     try {
-      const result = await apiService.askQuestion(question.trim());
+      console.log('🔍 Asking Gemini:', question);
+      console.log('🌍 Language:', getLanguageName(language));
+      
+      const promptText = language !== 'en' 
+        ? `${question}\n\nPlease respond in ${getLanguageName(language)} language.`
+        : question;
+
+      const requestBody = {
+        contents: [{
+          parts: [{ text: promptText }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 4096,
+        },
+        safetySettings: [
+          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' }
+        ]
+      };
+
+      console.log('📤 Sending request to Gemini API...');
+      
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody)
+        }
+      );
+
+      console.log('📥 Response status:', response.status);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('❌ API Error:', errorData);
+        throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('✅ Gemini response received');
+      
+      const result = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      
+      if (!result) {
+        console.error('⚠️ No text in response:', data);
+        throw new Error('No response text received from AI');
+      }
+      
+      console.log('📝 Answer length:', result.length, 'characters');
       return result;
     } catch (error) {
-      console.error('Question failed:', error);
+      console.error('❌ Question failed:', error);
+      console.error('Full error:', error);
       throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const translateText = async (text, language) => {
-    if (!isConfigured) {
-      throw new Error('API key required for translation');
-    }
-
-    try {
-      const result = await apiService.translateText(text, language);
-      return result;
-    } catch (error) {
-      console.error('Translation failed:', error);
-      throw error;
-    }
-  };
-
-  const summarizeText = async (text) => {
-    if (!isConfigured) {
-      throw new Error('API key required for summarization');
-    }
-
-    try {
-      const result = await apiService.summarizeText(text);
-      return result;
-    } catch (error) {
-      console.error('Summarization failed:', error);
-      throw error;
-    }
-  };
-
-  const resetConfiguration = () => {
-    setApiKey('');
-    setIsConfigured(false);
-    localStorage.removeItem('museum_guide_api_key');
-    toast.success('Configuration reset');
-  };
-
   const value = {
     apiKey,
     isConfigured,
     isLoading,
-    serverStatus,
-    configureAPI,
-    askQuestion,
-    translateText,
-    summarizeText,
-    resetConfiguration,
-    checkServerHealth
+    language,
+    changeLanguage,
+    askQuestion
   };
 
   return (

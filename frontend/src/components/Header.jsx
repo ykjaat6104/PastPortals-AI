@@ -14,9 +14,9 @@ import {
   Wifi,
   WifiOff,
   Search,
-  Museum
+  Clock,
+  Mic
 } from 'lucide-react';
-import { FaClock, FaMicrophone } from 'react-icons/fa';
 import { useAPI } from '../contexts/APIContext';
 import ConfigModal from './ConfigModal';
 
@@ -30,9 +30,9 @@ const Header = () => {
     { path: '/', label: 'Home', icon: Home },
     { path: '/explore', label: 'Explore', icon: Compass },
     { path: '/search', label: 'Search', icon: Search },
-    { path: '/museums', label: 'Museums', icon: Museum },
-    { path: '/timeline', label: 'Timeline', icon: FaClock },
-    { path: '/voice', label: 'Voice Guide', icon: FaMicrophone },
+    { path: '/museums', label: 'Museums', icon: Building2 },
+    { path: '/timeline', label: 'Timeline', icon: Clock },
+    { path: '/voice', label: 'Voice Guide', icon: Mic },
     { path: '/about', label: 'About', icon: Info },
   ];
 

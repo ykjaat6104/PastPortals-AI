@@ -1,37 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Header from './components/Header';
-import Home from './components/Home';
-import HistoryExplorer from './components/HistoryExplorer';
-import SearchPage from './components/SearchPage';
-import MuseumGallery from './components/MuseumGallery';
-import Timeline from './components/Timeline';
-import VoiceGuide from './components/VoiceGuide';
-import About from './components/About';
+import Sidebar from './components/Sidebar';
+import SettingsModal from './components/SettingsModal';
+import ExplorePage from './components/ExplorePage';
+import SearchPageNew from './components/SearchPageNew';
+import TimelinePageNew from './components/TimelinePageNew';
+import MuseumsPageNew from './components/MuseumsPageNew';
 import { APIProvider } from './contexts/APIContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 import './styles/globals.css';
 import './styles/components.css';
 
 function App() {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
   return (
     <APIProvider>
       <NotificationProvider>
-        <Router>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <div className="App">
-            <Header />
+            <Sidebar onSettingsClick={() => setIsSettingsOpen(true)} />
             <main className="main-content">
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/explore" element={<HistoryExplorer />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/museums" element={<MuseumGallery />} />
-                <Route path="/timeline" element={<Timeline />} />
-                <Route path="/voice" element={<VoiceGuide />} />
-                <Route path="/about" element={<About />} />
+                <Route path="/" element={<ExplorePage />} />
+                <Route path="/search" element={<SearchPageNew />} />
+                <Route path="/timeline" element={<TimelinePageNew />} />
+                <Route path="/museums" element={<MuseumsPageNew />} />
               </Routes>
             </main>
+            <SettingsModal 
+              isOpen={isSettingsOpen} 
+              onClose={() => setIsSettingsOpen(false)} 
+            />
             <Toaster
               position="top-right"
               toastOptions={{

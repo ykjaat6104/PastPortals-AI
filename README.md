@@ -1,168 +1,419 @@
-# 🏛️ AI Museum Guide - Professional Full Stack Application
+# 🌍 PastPortals - Your Gateway to World History
 
-An intelligent museum guide application providing comprehensive historical information about worldwide history, artifacts, exhibits, and historical topics. Features a modern React frontend with a powerful Python Flask backend powered by Google Gemini AI.
-
----
-
-## ✨ Features
-
-- 🤖 **AI-Powered Responses**: Uses Google Gemini AI for intelligent historical information
-- 🌍 **Worldwide History Coverage**: Comprehensive global historical knowledge
-- 🔍 **Smart Search Integration**: Wikipedia search for enhanced context
-- 🖼️ **Visual Learning**: Automatic historical image integration
-- 🌐 **Multi-Language Support**: Real-time translation to 18+ languages
-- 📝 **Smart Summarization**: AI-powered content summarization
-- 📱 **Responsive Design**: Modern, mobile-first interface
-- ⚡ **Production Ready**: Robust error handling and professional UX
+**PastPortals** is an intelligent historical exploration platform that brings world history to life through AI-powered conversations, real historical images, and interactive museum guides. Built with React and powered by Google Gemini AI, it provides an immersive journey through time and civilizations.
 
 ---
 
-## 🏗️ Architecture
+## ✨ Key Features
 
+### 🤖 **AI-Powered Historical Guide**
+- Intelligent conversations about any historical topic, event, or civilization
+- Powered by Google Gemini 2.5 Flash for accurate, comprehensive responses
+- Context-aware answers with minimum 500+ word detailed explanations
+- Real-time fact-checking using Wikipedia integration
+
+### 🖼️ **Real Historical Images**
+- Automatic image sourcing from Wikimedia Commons
+- Wikipedia-style text wrapping layout with authentic historical photographs
+- 3-4 curated images per topic with source attribution
+- Professional grid layout optimized for reading
+
+### 🌐 **Multi-Language Translation**
+- Real-time translation to 18+ languages
+- Support for: English, Hindi, French, Spanish, Portuguese, Arabic, Chinese, Japanese, German, Italian, Russian, Korean, and more
+- Seamless language switching without page reload
+
+### 🎤 **Voice Search Integration**
+- Hands-free search using Web Speech API
+- Visual feedback with color-coded status (Red: listening, Blue: ready)
+- Works in Chrome, Edge, and Brave browsers
+- Green search button for manual queries
+
+### 🏛️ **Interactive Museum Explorer**
+- Virtual tours of world-famous museums
+- Featured institutions: Louvre, British Museum, National Museum India, Egyptian Museum, Smithsonian, Palace Museum
+- Direct links to official museum websites
+- Detailed highlights and establishment history
+
+### 📜 **Historical Timeline Navigation**
+- Explore major historical periods and events
+- Interactive timeline with categorized eras
+- Quick-access topic tags for popular searches
+
+### 🔍 **Smart Search System**
+- Wikipedia-powered search with AI enhancement
+- Auto-search from topic tags and suggestions
+- Search available on all 4 pages (Home, Search, Timeline, Museums)
+- Instant results with comprehensive explanations
+
+### 📊 **Professional UI/UX**
+- Clean, modern design with light theme
+- Elegant sidebar navigation
+- Responsive layout for mobile, tablet, and desktop
+- Smooth animations and hover effects
+- Professional typography and spacing
+
+---
+
+## 🎯 Use Cases
+
+- **Students & Educators**: Research historical topics with verified sources
+- **History Enthusiasts**: Deep dive into civilizations, wars, and cultural movements
+- **Museum Visitors**: Pre-visit research and virtual museum exploration
+- **Language Learners**: Study history in multiple languages
+- **Content Creators**: Gather accurate historical information with citations
+
+---
+
+## 🏗️ Technical Architecture
+
+### **Frontend Stack**
+- **Framework**: React 18.2.0
+- **Routing**: React Router DOM 6.20.1
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Styling**: Custom CSS with CSS Variables
+- **API Integration**: Fetch API with async/await
+
+### **Backend Stack**
+- **Framework**: Flask (Python)
+- **AI Model**: Google Gemini 2.5 Flash
+- **APIs**: Wikipedia API, Wikimedia Commons API
+- **CORS**: Flask-CORS for cross-origin requests
+
+### **Project Structure**
 ```
-AI Museum Guide/
-├── backend/                 # Python Flask API
-│   ├── app.py              # Main Flask application
-│   └── requirements.txt    # Python dependencies
-├── frontend/               # React.js Application
-│   ├── public/            # Static assets
+PastPortals/
+├── frontend/                    # React Application
+│   ├── public/
+│   │   └── index.html          # HTML template
 │   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── styles/        # CSS styling
-│   │   ├── utils/         # API utilities
-│   │   └── App.js         # Main component
-│   └── package.json       # Node.js dependencies
-├── data/                  # Vector database storage
-└── start.bat             # Quick startup script
+│   │   ├── components/         # React Components
+│   │   │   ├── Home.jsx        # Landing page
+│   │   │   ├── SearchPageNew.jsx      # Main search interface
+│   │   │   ├── TimelinePageNew.jsx    # Timeline explorer
+│   │   │   ├── MuseumsPageNew.jsx     # Museum directory
+│   │   │   ├── VoiceSearchBar.jsx     # Voice search component
+│   │   │   ├── Header.jsx      # Navigation header
+│   │   │   └── Sidebar.jsx     # Navigation sidebar
+│   │   ├── contexts/           # React Context
+│   │   │   ├── APIContext.jsx  # API state management
+│   │   │   └── NotificationContext.jsx
+│   │   ├── styles/             # CSS Styling
+│   │   │   ├── globals.css     # Global styles
+│   │   │   ├── components.css  # Component styles
+│   │   │   └── sidebar.css     # Sidebar styles
+│   │   ├── utils/              # Utilities
+│   │   │   ├── api.js          # API functions
+│   │   │   └── imageSearch.js  # Wikimedia image fetcher
+│   │   ├── App.jsx             # Main app component
+│   │   └── index.js            # Entry point
+│   └── package.json            # Dependencies
+│
+├── backend/                    # Flask API Server
+│   ├── app.py                  # Main Flask app
+│   ├── config.py               # Configuration
+│   ├── routes/                 # API Routes
+│   │   ├── qa_routes.py        # Q&A endpoints
+│   │   ├── translate_routes.py # Translation
+│   │   ├── summarize_routes.py # Summarization
+│   │   ├── museum_routes.py    # Museum data
+│   │   └── config_routes.py    # Config endpoints
+│   ├── utils/                  # Backend utilities
+│   │   ├── ai_utils.py         # Gemini AI integration
+│   │   ├── wikipedia_utils.py  # Wikipedia API
+│   │   └── museum_utils.py     # Museum data
+│   ├── requirements.txt        # Python dependencies
+│   └── venv/                   # Virtual environment
+│
+├── .env                        # Environment variables (API keys)
+├── START_APP.bat               # Launch server (background mode)
+├── STOP_APP.bat               # Stop server
+├── CHECK_STATUS.bat           # Check server status
+├── RESTART_APP.bat            # Restart server
+└── README.md                  # This file
 ```
 
-## 🚀 Quick Start
+---
 
-### Option 1: One-Click Start (Recommended)
+## 🚀 Quick Start Guide
+
+### **Prerequisites**
+
+Before running PastPortals, ensure you have:
+
+1. **Node.js** (v16 or higher)
+   - Download: https://nodejs.org
+   - Verify: `node --version`
+
+2. **Google Gemini API Key**
+   - Get free key: https://aistudio.google.com/app/apikey
+   - Required for AI features
+
+### **Installation Steps**
+
+#### **Option 1: Easy Launch (Recommended)**
+
+1. **Double-click** `START_APP.bat`
+2. Wait 10-15 seconds for server to start
+3. Browser opens automatically at `http://localhost:3000`
+4. **Close the terminal** - server keeps running in background!
+
+#### **Option 2: Manual Setup**
+
 ```bash
-# Double-click start.bat in Windows Explorer
-# OR run from command prompt:
-start.bat
+# 1. Navigate to project directory
+cd "C:\Users\DELL\Desktop\Code\Projects\Ai Musem Guide"
+
+# 2. Install frontend dependencies
+cd frontend
+npm install
+
+# 3. Configure API Key
+# Create .env file in root directory:
+echo REACT_APP_GEMINI_API_KEY=your_api_key_here > .env
+
+# 4. Start the server
+npm start
+
+# Server runs at http://localhost:3000
 ```
 
-### Option 2: Manual Setup
+### **Environment Configuration**
 
-**Prerequisites:**
-- Python 3.8+ installed
-- Node.js 16+ installed  
-- Google Gemini API key ([Get it here](https://makersuite.google.com/app/apikey))
+Create a `.env` file in the root directory:
 
-**Backend Setup:**
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
+```env
+REACT_APP_GEMINI_API_KEY=AIzaSyB0-Fp_ndriVJEwddzbtomTfto_LTnSXCw
 ```
 
-**Frontend Setup:**
+*(Replace with your own API key from Google AI Studio)*
+
+---
+
+## 📖 How to Use
+
+### **1. Home Page**
+- Overview of PastPortals features
+- Quick access to all sections
+- Featured topics and civilizations
+
+### **2. Search Historical Topics**
+- Click "Search" in sidebar
+- Type your question or use voice search 🎤
+- Click green search button or press Enter
+- View AI-generated response with real historical images
+- Images appear on the right (Wikipedia-style layout)
+- Text wraps naturally around images
+
+### **3. Explore Timeline**
+- Navigate through historical periods
+- Click on era cards to learn more
+- Filter by civilization, war, empire, religion, art
+
+### **4. Visit Museums**
+- Browse 6 world-famous museums
+- Click museum cards to expand details
+- View highlights and artifacts
+- Click "Learn More" to visit official museum website
+
+### **5. Voice Search**
+- Click the microphone button (turns RED when listening)
+- Speak your question clearly
+- Button turns BLUE when ready
+- Works best with Chrome/Edge
+- *Note: Brave browser requires internet connection*
+
+### **6. Language Translation**
+- Click language selector (top of search page)
+- Choose from 18+ languages
+- Content translates instantly
+- UI language changes automatically
+
+---
+
+## 🛠️ Server Management
+
+### **Start Server**
 ```bash
-# In a new terminal
+# Windows Batch File
+START_APP.bat
+
+# Or PowerShell
+START_APP.ps1
+```
+
+### **Stop Server**
+```bash
+STOP_APP.bat
+```
+
+### **Check Status**
+```bash
+CHECK_STATUS.bat
+```
+
+### **Restart Server**
+```bash
+RESTART_APP.bat
+```
+
+### **Manual Commands (PowerShell)**
+```powershell
+# Start
+cd frontend
+npm start
+
+# Stop all Node processes
+Get-Process -Name node | Stop-Process -Force
+
+# Check if running
+Get-Process -Name node -ErrorAction SilentlyContinue
+```
+
+---
+
+## 🎨 Features in Detail
+
+### **Wikipedia-Style Layout**
+- Images float on the right side (320px max-width)
+- Text wraps around images naturally
+- Professional borders and captions
+- Source attribution for all images
+- Responsive design: stacks on mobile
+
+### **Image Sources**
+- **Wikimedia Commons API**: Free historical photographs
+- CORS-friendly, no API key required
+- Filters: JPEG/PNG only, minimum 400x300px
+- Maximum 3-4 images per search
+- Captions with title and source
+
+### **AI Response Quality**
+- Minimum 500 words per response
+- Structured sections:
+  1. Historical background
+  2. Key events and timeline
+  3. Cultural significance
+  4. Impact on civilization
+  5. Interesting facts
+  6. Modern relevance
+
+---
+
+## 🔧 Troubleshooting
+
+### **Server won't start?**
+```bash
 cd frontend
 npm install
 npm start
 ```
 
-## 🌐 Access Points
+### **Images not loading?**
+- Check internet connection
+- Wikimedia Commons requires online access
+- Images load from external CDN
 
-- **Frontend Application**: http://localhost:3000
-- **Backend API**: http://localhost:5000
-- **API Health Check**: http://localhost:5000/health
+### **Voice search not working?**
+- Use Chrome or Edge browser (best support)
+- Enable microphone permissions
+- Brave browser requires internet connection
+- Check browser console for errors
 
-## 🔑 Configuration
+### **API errors?**
+- Verify `.env` file exists in root
+- Check API key is valid
+- Ensure `REACT_APP_GEMINI_API_KEY` is set
+- Restart server after changing .env
 
-1. **Launch the application** at http://localhost:3000
-2. **Click "Configure API"** in the top-right corner
-3. **Enter your Google Gemini API key**
-4. **Start exploring world history!**
+### **Port 3000 already in use?**
+```powershell
+# Find process on port 3000
+netstat -ano | findstr :3000
 
-## 📖 Usage Guide
-
-### Quick Questions
-- Click on any pre-defined topic card for instant historical insights
-- Topics include Ancient Rome, Egypt, Medieval Europe, Renaissance, and more
-
-### Custom Questions  
-- Type any historical question in the search box
-- Ask about specific dates, people, events, or civilizations
-- Examples:
-  - "Tell me about the Roman Empire"
-  - "What caused World War I?"
-  - "Describe the Renaissance period"
-
-### Advanced Features
-- **Translation**: Convert responses to 18+ languages
-- **Summarization**: Get concise summaries of detailed content
-- **Visual Learning**: Automatic Wikipedia image integration
-
-## 🔧 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/health` | System health status |
-| POST | `/configure` | Configure Gemini API key |
-| POST | `/ask` | Submit historical questions |
-| POST | `/translate` | Translate responses |
-| POST | `/summarize` | Generate summaries |
-
-## 🎨 Design Philosophy
-
-**Professional Medium-Tone Color Palette:**
-- Primary: Sophisticated blues (#3b82f6 to #1d4ed8)
-- Secondary: Elegant purples (#a855f7 to #7c3aed)  
-- Accent: Warm oranges (#f97316 to #c2410c)
-- Neutrals: Professional grays (#f8fafc to #0f172a)
-
-**Modern UI/UX Features:**
-- Framer Motion animations for smooth interactions
-- Lucide React icons for consistent iconography
-- Responsive grid layouts with mobile-first approach
-- Professional shadows and gradients
-- Accessible color contrasts and typography
-
-## 🚨 Troubleshooting
-
-**Common Issues:**
-
-❌ **"API Key not configured"**
-- Enter your Gemini API key via the Configure API button
-- Verify the key is valid at [Google AI Studio](https://makersuite.google.com/app/apikey)
-
-❌ **"Server not responding"**  
-- Ensure backend server is running on port 5000
-- Check that Python dependencies are installed
-
-❌ **"Frontend not loading"**
-- Verify Node.js dependencies: `npm install`
-- Ensure port 3000 is available
-
-## 🌟 Production Features
-
-- **Automatic Model Detection**: Tries multiple Gemini models for compatibility
-- **Graceful Fallback**: Wikipedia integration when AI is unavailable
-- **Error Boundaries**: User-friendly error messages
-- **Performance Optimized**: Lazy loading and efficient API calls
-- **Professional Logging**: Comprehensive request/response tracking
-- **Security**: API key encryption and secure storage
-
-## 💻 Development
-
-**Tech Stack:**
-- **Frontend**: React 18, Framer Motion, Lucide React, Axios
-- **Backend**: Flask, Google Generative AI, LangChain, FAISS
-- **Styling**: Custom CSS with CSS Variables, Modern Design System
-- **APIs**: Google Gemini AI, Wikipedia REST API
-
-## 📄 License
-
-This project is licensed under the MIT License.
+# Kill the process (replace PID)
+taskkill /F /PID <PID_NUMBER>
+```
 
 ---
 
-**🎯 Built for history enthusiasts, students, educators, and curious minds worldwide**
+## 📚 API Endpoints
+
+### **Frontend → Backend Communication**
+
+```javascript
+// Search historical topics
+POST /api/qa
+Body: { question: "Tell me about Roman Empire" }
+
+// Translate content
+POST /api/translate
+Body: { text: "content", targetLanguage: "hi" }
+
+// Summarize text
+POST /api/summarize
+Body: { text: "long content" }
+
+// Get museum data
+GET /api/museums
+
+// Update configuration
+POST /api/config
+Body: { apiKey: "new_key" }
+```
+
+---
+
+## 🌟 Key Technologies
+
+- **React 18** - Modern UI framework
+- **Google Gemini AI** - Advanced language model
+- **Wikipedia API** - Historical data source
+- **Wikimedia Commons** - Historical image repository
+- **Web Speech API** - Voice recognition
+- **React Router** - Client-side routing
+- **Framer Motion** - Smooth animations
+- **CSS Variables** - Theming system
+
+---
+
+## 📝 License
+
+This project is for educational and research purposes. All historical content sourced from Wikipedia and Wikimedia Commons under Creative Commons licenses.
+
+---
+
+## 👥 Credits
+
+- **Historical Data**: Wikipedia Foundation
+- **Images**: Wikimedia Commons
+- **AI Model**: Google Gemini
+- **Museums**: Official museum databases
+- **UI Icons**: Lucide React
+
+---
+
+## 🚀 Future Enhancements
+
+- [ ] Dark theme toggle
+- [ ] Bookmark favorite topics
+- [ ] Export to PDF functionality
+- [ ] Advanced filtering and search
+- [ ] User accounts and history
+- [ ] More museum integrations
+- [ ] Interactive 3D artifacts
+- [ ] Offline mode support
+
+---
+
+## 📞 Support
+
+For issues, questions, or contributions:
+- GitHub: [Ai-Museum-Guide](https://github.com/ykjaat6104/Ai-Museum-Guide)
+- Report bugs via GitHub Issues
+- Check `SERVER_GUIDE.md` for detailed server documentation
+
+---
+
+**PastPortals** - *Bringing History to Life Through Technology* 🌍✨
