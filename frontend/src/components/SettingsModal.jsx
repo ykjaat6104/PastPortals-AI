@@ -81,7 +81,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
           {/* About Section */}
           <section className="settings-section">
             <div className="section-header">
-              <h3>About AI Museum Guide</h3>
+              <h3>About PastPortals</h3>
             </div>
             <div className="about-content">
               <p className="about-text">

@@ -80,7 +80,7 @@ const Header = () => {
                 <Building2 className="logo-icon" />
               </motion.div>
               <div className="logo-text">
-                <h1>AI Museum Guide</h1>
+                <h1>PastPortals</h1>
                 <span className="tagline">Explore World History</span>
               </div>
             </Link>

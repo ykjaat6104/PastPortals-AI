@@ -76,7 +76,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1>About AI Museum Guide</h1>
+            <h1>About PastPortals</h1>
             <p className="hero-subtitle">
               Revolutionizing historical education through artificial intelligence, 
               making world history accessible, engaging, and comprehensive for everyone.
@@ -99,7 +99,7 @@ const About = () => {
               <h2>Our Mission</h2>
               <p>
                 We believe that understanding history is crucial for understanding our present 
-                and shaping our future. Our AI Museum Guide democratizes access to historical 
+                and shaping our future. PastPortals democratizes access to historical 
                 knowledge by providing intelligent, comprehensive, and engaging responses to 
                 historical inquiries from around the world.
               </p>

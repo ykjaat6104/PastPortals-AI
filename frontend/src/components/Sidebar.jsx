@@ -28,7 +28,7 @@ const Sidebar = ({ onSettingsClick }) => {
           <div className="logo-icon">
             <Building2 size={28} />
           </div>
-          <h1 className="logo-text">AI Museum Guide</h1>
+          <h1 className="logo-text">PastPortals</h1>
         </div>
       </div>
 

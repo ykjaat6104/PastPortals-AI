@@ -243,7 +243,7 @@ const VoiceGuide = () => {
           animate={{ opacity: 1, y: 0 }}
         >
           <Headphones size={48} color="#10B981" />
-          <h1>AI Voice Museum Guide</h1>
+          <h1>PastPortals Voice Guide</h1>
           <p>Ask questions and listen to historical insights in your language</p>
         </motion.div>
 

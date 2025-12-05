@@ -1,5 +1,5 @@
 /**
- * Custom React hooks for AI Museum Guide
+ * Custom React hooks for PastPortals
  */
 import { useState, useEffect, useRef, useCallback } from 'react';
 

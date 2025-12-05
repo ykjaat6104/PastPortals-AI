@@ -184,10 +184,10 @@ npm start
 Create a `.env` file in the root directory:
 
 ```env
-REACT_APP_GEMINI_API_KEY=AIzaSyB0-Fp_ndriVJEwddzbtomTfto_LTnSXCw
+REACT_APP_GEMINI_API_KEY=your_actual_api_key_here
 ```
 
-*(Replace with your own API key from Google AI Studio)*
+*(Replace `your_actual_api_key_here` with your API key from [Google AI Studio](https://aistudio.google.com/app/apikey))*
 
 ---
 
