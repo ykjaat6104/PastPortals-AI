@@ -153,6 +153,8 @@ def detect_language():
             "confidence": "high|medium|low"
         }
     """
+    from utils.ai_utils import is_gemini_configured, generate_content
+    
     try:
         data = request.get_json()
         text = data.get('text', '').strip()
