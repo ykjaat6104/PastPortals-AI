@@ -4,16 +4,6 @@ Q&A routes for historical questions
 from flask import Blueprint, request, jsonify
 from datetime import datetime
 import asyncio
-from utils import (
-    is_historical_question,
-    generate_history_prompt,
-    generate_fallback_response,
-    search_vector_db,
-    search_and_summarize,
-    search_multiple_museums,
-    is_gemini_configured,
-    generate_content
-)
 
 qa_bp = Blueprint('qa', __name__)
 
@@ -43,6 +33,13 @@ async def get_ai_response(question):
     Returns:
         dict: Response with answer, source, and metadata
     """
+    # Import only when function is called
+    from utils import (
+        is_historical_question, generate_history_prompt,
+        search_vector_db, search_and_summarize,
+        search_multiple_museums, is_gemini_configured, generate_content
+    )
+    
     # Check if question is historical
     if not is_historical_question(question):
         return {

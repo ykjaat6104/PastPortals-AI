@@ -1,9 +1,8 @@
 """
-Museum API routes
+"""Museum API routes
 """
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from utils import search_smithsonian, search_multiple_museums, format_museum_response
 
 museum_bp = Blueprint('museum', __name__)
 

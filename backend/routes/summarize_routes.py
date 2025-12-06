@@ -1,9 +1,8 @@
 """
-Summarization routes
+"""Summarization routes
 """
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from utils import is_gemini_configured, generate_content
 
 summarize_bp = Blueprint('summarize', __name__)
 

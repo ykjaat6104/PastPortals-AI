@@ -1,9 +1,8 @@
 """
-Translation routes for multilingual support
+"""Translation routes for multilingual support
 """
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from utils import is_gemini_configured, generate_content
 
 translate_bp = Blueprint('translate', __name__)
 
@@ -50,6 +49,8 @@ def translate_text():
             "timestamp": "..."
         }
     """
+    from utils import is_gemini_configured, generate_content
+    
     try:
         data = request.get_json()
         text = data.get('text', '').strip()
