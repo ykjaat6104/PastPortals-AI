@@ -1,6 +1,6 @@
 # 🌍 PastPortals - Your Gateway to World History
 
-**PastPortals** is an intelligent historical exploration platform that brings world history to life through AI-powered conversations, real historical images, and interactive museum guides. Built with React and powered by Google Gemini AI, it provides an immersive journey through time and civilizations.
+**PastPortals** is an intelligent historical exploration AI-Powered Multimodal RAG-Based platform that brings world history to life through conversations, real historical images, and interactive museum guides. Built with React and powered by Google Gemini AI, it provides an immersive journey through time and civilizations.
 
 ---
 
@@ -85,8 +85,10 @@
 ### **Backend Stack**
 - **Framework**: Flask (Python)
 - **AI Model**: Google Gemini 2.5 Flash
+- **RETRIEVAL-AUGMENTED GENERATION**: Langchain, RAG
 - **APIs**: Wikipedia API, Wikimedia Commons API
 - **CORS**: Flask-CORS for cross-origin requests
+- **VECTOR DATABASE**: FAISS 
 
 ### **Project Structure**
 ```
