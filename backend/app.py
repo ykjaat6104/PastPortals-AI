@@ -102,7 +102,7 @@ def create_app():
     print(f"   Museum APIs: {museum_status}")
     
     print(f"   Wikipedia API: Ready")
-    print("="*60 + "\n")
+    print("="*60 + "\n")gggg
     
     # Register blueprints
     app.register_blueprint(config_bp, url_prefix='/api')
