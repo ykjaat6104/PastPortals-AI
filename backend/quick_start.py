@@ -29,10 +29,10 @@ if __name__ == "__main__":
     config = get_config()
     
     print("\n" + "="*60)
-    print("🚀 QUICK START: Populating Vector Database")
+    print("QUICK START: Populating Vector Database")
     print("="*60)
-    print(f"\n📚 Loading {len(QUICK_START_TOPICS)} essential historical topics...")
-    print("⏱️  This will take approximately 2-3 minutes...\n")
+    print(f"\nLoading {len(QUICK_START_TOPICS)} essential historical topics...")
+    print("This will take approximately 2-3 minutes...\n")
     
     success, failure = populate_vector_database(
         QUICK_START_TOPICS,
@@ -42,6 +42,6 @@ if __name__ == "__main__":
         delay=0.5  # Faster for quick start
     )
     
-    print(f"\n✅ Quick start complete!")
+    print(f"\nQuick start complete!")
     print(f"   Successfully loaded: {success}/{len(QUICK_START_TOPICS)} topics")
     print(f"   You can now restart the backend server.\n")

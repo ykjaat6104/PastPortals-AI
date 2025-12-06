@@ -116,7 +116,7 @@ const Home = () => {
                   animate={{ y: [-10, 10, -10] }}
                   transition={{ repeat: Infinity, duration: 3 }}
                 >
-                  🏛️
+                  [Museum]
                 </motion.div>
                 <motion.div
                   className="floating-element floating-element-2"

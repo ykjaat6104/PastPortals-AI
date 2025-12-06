@@ -40,9 +40,9 @@ def create_app():
     os.makedirs(config.GENERATED_IMAGES_DIR, exist_ok=True)
     
     print("\n" + "="*60)
-    print("🏛️  PASTPORTALS - Backend Server")
+    print("PASTPORTALS - Backend Server")
     print("="*60)
-    print(f"\n📊 Environment: {config.FLASK_ENV}")
+    print(f"\nEnvironment: {config.FLASK_ENV}")
     
     # Import routes only when needed
     from routes import (
@@ -63,7 +63,7 @@ def create_app():
         from utils import load_vector_db, get_embeddings_model
         
         embeddings_model = get_embeddings_model(config.EMBEDDING_MODEL)
-        embeddings_status = "✅ Loaded" if embeddings_model else "❌ Failed"
+        embeddings_status = "Loaded" if embeddings_model else "Failed"
         print(f"   Embeddings Model: {embeddings_status}")
         
         vector_index, text_map = load_vector_db(
@@ -72,9 +72,9 @@ def create_app():
         )
         
         if vector_index and text_map:
-            vector_status = f"✅ Loaded ({vector_index.ntotal} vectors)"
+            vector_status = f"Loaded ({vector_index.ntotal} vectors)"
         else:
-            vector_status = "⚠️  Empty (will use online sources)"
+            vector_status = "Empty (will use online sources)"
         print(f"   Vector Database: {vector_status}")
         
         qa_set_vector_db(vector_index, text_map)
@@ -85,21 +85,21 @@ def create_app():
     gemini_key = config.GEMINI_API_KEY
     if gemini_key:
         ai_configured = setup_gemini(gemini_key)
-        ai_status = "✅ Configured" if ai_configured else "⚠️  Configuration failed"
+        ai_status = "Configured" if ai_configured else "Configuration failed"
     else:
-        ai_status = "⚠️  Not configured (use /configure endpoint)"
+        ai_status = "Not configured (use /configure endpoint)"
     print(f"   Gemini AI: {ai_status}")
     
     # Set museum API keys
     if config.SMITHSONIAN_API_KEY:
         museum_set_api_key(config.SMITHSONIAN_API_KEY)
         qa_set_museum_key(config.SMITHSONIAN_API_KEY)
-        museum_status = "✅ Configured"
+        museum_status = "Configured"
     else:
-        museum_status = "⚠️  No API key (public access only)"
+        museum_status = "No API key (public access only)"
     print(f"   Museum APIs: {museum_status}")
     
-    print(f"   Wikipedia API: ✅ Ready")
+    print(f"   Wikipedia API: Ready")
     print("="*60 + "\n")
     
     # Register blueprints
@@ -156,9 +156,9 @@ def create_app():
         }), 400
     
     print("\n" + "="*60)
-    print(f"🚀 Server Ready - http://{config.HOST}:{config.PORT}")
-    print(f"📖 Environment: {config.FLASK_ENV}")
-    print(f"🌍 CORS Origins: {', '.join(config.CORS_ORIGINS)}")
+    print(f"Server Ready - http://{config.HOST}:{config.PORT}")
+    print(f"Environment: {config.FLASK_ENV}")
+    print(f"CORS Origins: {', '.join(config.CORS_ORIGINS)}")
     print("="*60 + "\n")
     
     return app

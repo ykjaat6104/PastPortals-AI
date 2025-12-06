@@ -46,8 +46,8 @@ export const APIProvider = ({ children }) => {
 
     setIsLoading(true);
     try {
-      console.log('🔍 Asking question via backend:', question);
-      console.log('🌍 Language:', getLanguageName(language));
+      console.log('Asking question via backend:', question);
+      console.log('Language:', getLanguageName(language));
       
       // Use backend API instead of calling Gemini directly
       // This keeps the API key secure on the server side
@@ -66,24 +66,24 @@ export const APIProvider = ({ children }) => {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        console.error('❌ API Error:', errorData);
+        console.error('API Error:', errorData);
         throw new Error(errorData.error || `API Error: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log('✅ Backend response received');
+      console.log('Backend response received');
       
       const result = data.answer || data.response;
       
       if (!result) {
-        console.error('⚠️ No text in response:', data);
+        console.error('No text in response:', data);
         throw new Error('No response text received from backend');
       }
       
-      console.log('📝 Answer length:', result.length, 'characters');
+      console.log('Answer length:', result.length, 'characters');
       return result;
     } catch (error) {
-      console.error('❌ Question failed:', error);
+      console.error('Question failed:', error);
       console.error('Full error:', error);
       throw error;
     } finally {

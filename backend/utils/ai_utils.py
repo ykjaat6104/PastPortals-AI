@@ -95,7 +95,7 @@ def setup_gemini(api_key, models_to_try=None):
         # Fallback: Try predefined models
         for model_name in models_to_try:
             try:
-                print(f"🔄 Trying fallback model: {model_name}")
+                print(f"Trying fallback model: {model_name}")
                 model = genai.GenerativeModel(model_name)
                 test_response = model.generate_content("Hello")
                 

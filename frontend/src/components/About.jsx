@@ -115,7 +115,7 @@ const About = () => {
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
               >
-                🏛️
+                [Museum]
               </motion.div>
             </div>
           </motion.div>

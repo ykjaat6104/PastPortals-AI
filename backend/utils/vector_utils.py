@@ -20,7 +20,7 @@ def load_vector_db(index_path, text_map_path):
     """
     try:
         if not os.path.exists(index_path) or not os.path.exists(text_map_path):
-            print(f"⚠️  Vector database files not found")
+            print(f"Vector database files not found")
             return None, None
         
         index = faiss.read_index(index_path)
@@ -28,11 +28,11 @@ def load_vector_db(index_path, text_map_path):
         with open(text_map_path, 'r', encoding='utf-8') as f:
             text_map = json.load(f)
         
-        print(f"✅ Loaded vector database: {index.ntotal} vectors")
+        print(f"Loaded vector database: {index.ntotal} vectors")
         return index, text_map
         
     except Exception as e:
-        print(f"❌ Error loading vector database: {str(e)}")
+        print(f"Error loading vector database: {str(e)}")
         return None, None
 
 def save_vector_db(index, text_map, index_path, text_map_path):
@@ -57,11 +57,11 @@ def save_vector_db(index, text_map, index_path, text_map_path):
         with open(text_map_path, 'w', encoding='utf-8') as f:
             json.dump(text_map, f, ensure_ascii=False, indent=2)
         
-        print(f"✅ Saved vector database: {index.ntotal} vectors")
+        print(f"Saved vector database: {index.ntotal} vectors")
         return True
         
     except Exception as e:
-        print(f"❌ Error saving vector database: {str(e)}")
+        print(f"Error saving vector database: {str(e)}")
         return False
 
 def create_vector_db(texts, dimension=768):
@@ -81,7 +81,7 @@ def create_vector_db(texts, dimension=768):
             return None, None
         
         # Create embeddings
-        print(f"🔄 Creating embeddings for {len(texts)} texts...")
+        print(f"Creating embeddings for {len(texts)} texts...")
         embeddings = embeddings_model.embed_documents(texts)
         embeddings_array = np.array(embeddings, dtype=np.float32)
         
@@ -92,11 +92,11 @@ def create_vector_db(texts, dimension=768):
         # Create text mapping
         text_map = {str(i): text for i, text in enumerate(texts)}
         
-        print(f"✅ Created vector database with {index.ntotal} vectors")
+        print(f"Created vector database with {index.ntotal} vectors")
         return index, text_map
         
     except Exception as e:
-        print(f"❌ Error creating vector database: {str(e)}")
+        print(f"Error creating vector database: {str(e)}")
         return None, None
 
 def add_to_vector_db(index, text_map, new_texts):
@@ -120,7 +120,7 @@ def add_to_vector_db(index, text_map, new_texts):
         start_idx = index.ntotal
         
         # Create embeddings for new texts
-        print(f"🔄 Adding {len(new_texts)} new texts to vector database...")
+        print(f"Adding {len(new_texts)} new texts to vector database...")
         new_embeddings = embeddings_model.embed_documents(new_texts)
         new_embeddings_array = np.array(new_embeddings, dtype=np.float32)
         
@@ -131,11 +131,11 @@ def add_to_vector_db(index, text_map, new_texts):
         for i, text in enumerate(new_texts):
             text_map[str(start_idx + i)] = text
         
-        print(f"✅ Vector database now has {index.ntotal} vectors")
+        print(f"Vector database now has {index.ntotal} vectors")
         return index, text_map
         
     except Exception as e:
-        print(f"❌ Error adding to vector database: {str(e)}")
+        print(f"Error adding to vector database: {str(e)}")
         return index, text_map
 
 def search_vector_db(query, index, text_map, k=3):
@@ -165,7 +165,7 @@ def search_vector_db(query, index, text_map, k=3):
         
         # Validate dimensions
         if query_embedding.shape[1] != index.d:
-            print(f"⚠️  Dimension mismatch: query={query_embedding.shape[1]}, index={index.d}")
+            print(f"Dimension mismatch: query={query_embedding.shape[1]}, index={index.d}")
             return []
         
         # Search
@@ -181,7 +181,7 @@ def search_vector_db(query, index, text_map, k=3):
         return relevant_contexts
         
     except Exception as e:
-        print(f"❌ Error searching vector database: {str(e)}")
+        print(f"Error searching vector database: {str(e)}")
         return []
 
 def get_vector_db_stats(index, text_map):

@@ -122,7 +122,7 @@ const MuseumsPageNew = () => {
       {searching && (
         <div className="loading-state">
           <div className="loading-spinner"></div>
-          <p>🏛️ Searching museum database...</p>
+          <p>Searching museum database...</p>
           <small>Powered by Google Gemini</small>
         </div>
       )}

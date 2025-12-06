@@ -144,7 +144,7 @@ const QuickQuestions = () => {
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 >
-                  ⏳
+                  Loading...
                 </motion.div>
               ) : (
                 <question.icon className="w-6 h-6" />
@@ -174,7 +174,7 @@ const QuickQuestions = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 0.6 }}
       >
-        <p>💡 Click any question to start exploring with AI-powered insights</p>
+        <p>Click any question to start exploring with AI-powered insights</p>
       </motion.div>
     </div>
   );

@@ -39,7 +39,7 @@ const SearchPageNew = () => {
       });
       
       try {
-        console.log('🔍 Starting search for:', query);
+        console.log('Starting search for:', query);
         const prompt = `Provide a detailed, comprehensive answer about ${query} in world history (minimum 500 words). Include:
 1. Historical background and origins
 2. Key events and timeline
@@ -49,10 +49,10 @@ const SearchPageNew = () => {
 6. Legacy and modern relevance
 Use Wikipedia and historical sources to provide accurate, well-structured information.`;
         const response = await askQuestion(prompt);
-        console.log('✅ Got response, length:', response.length);
+        console.log('Got response, length:', response.length);
         setSearchResult(response);
       } catch (error) {
-        console.error('❌ Search error:', error);
+        console.error('Search error:', error);
         const errorMsg = `Error: ${error.message}
 
 Troubleshooting:
@@ -104,7 +104,7 @@ Troubleshooting:
         <p className="page-subtitle">
           Ask questions about any historical topic, event, or civilization
           <span style={{ marginLeft: '12px', padding: '4px 12px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '12px', fontSize: '0.85em', fontWeight: '600', color: '#6366f1' }}>
-            🌍 {getLanguageName(language)}
+            {getLanguageName(language)}
           </span>
         </p>
       </div>

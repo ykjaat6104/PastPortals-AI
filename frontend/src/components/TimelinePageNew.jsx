@@ -41,7 +41,7 @@ const TimelinePageNew = () => {
     {
       id: 'roman',
       name: 'Roman Empire',
-      flag: '🏛️',
+      flag: '[M]',
       color: 'from-red-600 to-purple-700',
       periods: [
         { year: '753 BCE', event: 'Founding of Rome', description: 'Legendary founding by Romulus' },

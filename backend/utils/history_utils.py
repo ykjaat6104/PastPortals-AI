@@ -232,18 +232,18 @@ def generate_fallback_response(question, relevant_context=None, wikipedia_info=N
     response_parts = []
     
     if wikipedia_info:
-        response_parts.append(f"## 📚 {wikipedia_info.get('title', 'Historical Information')}")
+        response_parts.append(f"##  {wikipedia_info.get('title', 'Historical Information')}")
         response_parts.append(f"\n{wikipedia_info.get('extract', '')}")
         
         if wikipedia_info.get('url'):
             response_parts.append(f"\n**Source:** [Wikipedia]({wikipedia_info['url']})")
     
     if relevant_context:
-        response_parts.append(f"\n## 📖 Additional Context\n{relevant_context}")
+        response_parts.append(f"\n## Additional Context\n{relevant_context}")
     
     if not response_parts:
         response_parts.append(f"""
-## 🔍 Historical Query: {question}
+## Historical Query: {question}
 
 I found limited information for this specific query. This could be because:
 - The topic requires more specific search terms

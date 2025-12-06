@@ -97,7 +97,7 @@ def configure_api():
             }), 400
             
     except Exception as e:
-        print(f"❌ Configuration error: {str(e)}")
+        print(f"Configuration error: {str(e)}")
         return jsonify({'error': f'Configuration error: {str(e)}'}), 500
 
 @config_bp.route('/status', methods=['GET'])

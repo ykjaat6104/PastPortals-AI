@@ -70,7 +70,7 @@ const MuseumGallery = () => {
           <div className="header-content">
             <Building2 size={48} />
             <div>
-              <h1>🏛️ Museum Collection Gallery</h1>
+              <h1>Museum Collection Gallery</h1>
               <p>Explore artifacts from world-class museums</p>
             </div>
           </div>
@@ -218,7 +218,7 @@ const MuseumGallery = () => {
                       <p>{collection.description}</p>
                       <div className="collection-stats">
                         <span className="stat">
-                          📚 {collection.total_items}
+                          {collection.total_items} items
                         </span>
                         {collection.open_access && (
                           <span className="badge">Open Access</span>

@@ -66,7 +66,7 @@ const ExplorePage = () => {
   };
 
   const handleTopicClick = (topic) => {
-    console.log('🏷️ Tag clicked:', topic);
+    console.log('Tag clicked:', topic);
     navigate('/search', { state: { query: topic, autoSearch: true } });
   };
 

@@ -120,7 +120,7 @@ const SearchPage = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1>🔍 Explore World History</h1>
+          <h1>Explore World History</h1>
           <p>Search through thousands of historical topics, events, and figures</p>
         </motion.div>
 
@@ -269,7 +269,7 @@ const SearchPage = () => {
                           rel="noopener noreferrer"
                           className="source-link"
                         >
-                          📚 View on Wikipedia
+                          View on Wikipedia
                         </a>
                       </div>
                     )}

@@ -31,7 +31,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
     
     // Show visual feedback
     const langName = languages.find(l => l.code === langCode)?.name || langCode;
-    console.log(`🌐 Language changed to: ${langName}`);
+    console.log(`Language changed to: ${langName}`);
   };
 
   if (!isOpen) return null;
@@ -91,9 +91,9 @@ const SettingsModal = ({ isOpen, onClose }) => {
               </p>
               <div className="feature-list">
                 <div className="feature-item">✨ AI-Powered Responses</div>
-                <div className="feature-item">🖼️ Image Generation</div>
+                <div className="feature-item">Image Generation</div>
                 <div className="feature-item">🎤 Voice Commands</div>
-                <div className="feature-item">🌍 12 Languages Support</div>
+                <div className="feature-item">12 Languages Support</div>
               </div>
             </div>
           </section>

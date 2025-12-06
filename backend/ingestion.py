@@ -109,7 +109,7 @@ def fetch_wikipedia_content(topic, max_retries=3):
             summary = get_wikipedia_summary(topic)
             
             if not summary:
-                print(f"⚠️  No summary found for: {topic}")
+                print(f"No summary found for: {topic}")
                 return None
             
             # Combine title and extract
@@ -126,10 +126,10 @@ def fetch_wikipedia_content(topic, max_retries=3):
             
         except Exception as e:
             if attempt < max_retries - 1:
-                print(f"⚠️  Retry {attempt + 1}/{max_retries} for {topic}: {str(e)}")
+                print(f"Retry {attempt + 1}/{max_retries} for {topic}: {str(e)}")
                 time.sleep(2)  # Wait before retry
             else:
-                print(f"❌ Failed to fetch {topic} after {max_retries} attempts: {str(e)}")
+                print(f"Failed to fetch {topic} after {max_retries} attempts: {str(e)}")
                 return None
     
     return None
@@ -149,11 +149,11 @@ def populate_vector_database(topics, index_path, text_map_path, batch_size=50, d
         tuple: (success_count, failure_count)
     """
     print("\n" + "="*60)
-    print("🌍 CONTENT INGESTION PIPELINE")
+    print("CONTENT INGESTION PIPELINE")
     print("="*60)
-    print(f"\n📚 Total topics to process: {len(topics)}")
+    print(f"\nTotal topics to process: {len(topics)}")
     print(f"📦 Batch size: {batch_size}")
-    print(f"⏱️  Delay between requests: {delay}s")
+    print(f"Delay between requests: {delay}s")
     print(f"💾 Index will be saved to: {index_path}")
     print("\n" + "-"*60 + "\n")
     
@@ -171,10 +171,10 @@ def populate_vector_database(topics, index_path, text_map_path, batch_size=50, d
         if content:
             all_texts.append(content)
             success_count += 1
-            print("✅")
+            print("OK")
         else:
             failure_count += 1
-            print("❌")
+            print("FAIL")
         
         # Add delay to respect API rate limits
         if i < len(topics):
@@ -200,10 +200,10 @@ def populate_vector_database(topics, index_path, text_map_path, batch_size=50, d
                     
                     if index and text_map:
                         save_vector_db(index, text_map, index_path, text_map_path)
-                        print(f"✅ Saved {len(all_texts)} texts (Total: {index.ntotal} vectors)")
+                        print(f"Saved {len(all_texts)} texts (Total: {index.ntotal} vectors)")
                         all_texts = []  # Clear batch
                 except Exception as e:
-                    print(f"❌ Failed to save batch: {str(e)}")
+                    print(f"Failed to save batch: {str(e)}")
             print()
     
     # Final save for remaining texts
@@ -221,21 +221,21 @@ def populate_vector_database(topics, index_path, text_map_path, batch_size=50, d
             
             if index and text_map:
                 save_vector_db(index, text_map, index_path, text_map_path)
-                print(f"✅ Final save complete (Total: {index.ntotal} vectors)")
+                print(f"Final save complete (Total: {index.ntotal} vectors)")
         except Exception as e:
-            print(f"❌ Failed final save: {str(e)}")
+            print(f"Failed final save: {str(e)}")
     
     # Print summary
     end_time = datetime.now()
     duration = (end_time - start_time).total_seconds()
     
     print("\n" + "="*60)
-    print("📊 INGESTION SUMMARY")
+    print("INGESTION SUMMARY")
     print("="*60)
-    print(f"✅ Successful: {success_count}")
-    print(f"❌ Failed: {failure_count}")
+    print(f"Successful: {success_count}")
+    print(f"Failed: {failure_count}")
     print(f"📈 Success rate: {(success_count/len(topics)*100):.1f}%")
-    print(f"⏱️  Total time: {duration:.1f}s ({duration/60:.1f} minutes)")
+    print(f"Total time: {duration:.1f}s ({duration/60:.1f} minutes)")
     print(f"⚡ Average: {duration/len(topics):.2f}s per topic")
     print("="*60 + "\n")
     
@@ -256,7 +256,7 @@ def run_ingestion_pipeline(config):
     # Determine topics to fetch
     topics_to_fetch = HISTORICAL_TOPICS[:config.WIKIPEDIA_ARTICLES_LIMIT]
     
-    print(f"\n🚀 Starting content ingestion for {len(topics_to_fetch)} topics...")
+    print(f"\nStarting content ingestion for {len(topics_to_fetch)} topics...")
     
     # Run population
     success, failure = populate_vector_database(
@@ -268,9 +268,9 @@ def run_ingestion_pipeline(config):
     )
     
     if success > 0:
-        print(f"✅ Ingestion complete! {success} topics successfully added to vector database.")
+        print(f"Ingestion complete! {success} topics successfully added to vector database.")
     else:
-        print("❌ Ingestion failed. No content was added.")
+        print("Ingestion failed. No content was added.")
     
     return success, failure
 

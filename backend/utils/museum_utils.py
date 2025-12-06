@@ -64,7 +64,7 @@ def search_smithsonian(query, api_key=None, limit=10):
         return []
         
     except Exception as e:
-        print(f"❌ Smithsonian API error: {str(e)}")
+        print(f"Smithsonian API error: {str(e)}")
         return []
 
 def get_smithsonian_object(object_id, api_key=None):
@@ -93,7 +93,7 @@ def get_smithsonian_object(object_id, api_key=None):
         return None
         
     except Exception as e:
-        print(f"❌ Smithsonian object retrieval error: {str(e)}")
+        print(f"Smithsonian object retrieval error: {str(e)}")
         return None
 
 def search_europeana(query, limit=10):
@@ -110,7 +110,7 @@ def search_europeana(query, limit=10):
     """
     # Placeholder for Europeana integration
     # Users need to register for API key at: https://pro.europeana.eu/page/get-api
-    print("⚠️  Europeana API requires registration. Visit: https://pro.europeana.eu/page/get-api")
+    print("Europeana API requires registration. Visit: https://pro.europeana.eu/page/get-api")
     return []
 
 def search_multiple_museums(query, api_key=None, limit_per_source=5):
@@ -153,7 +153,7 @@ def format_museum_response(artifacts):
     if not artifacts:
         return "No museum artifacts found for this query."
     
-    response_parts = [f"## 🏛️ Museum Artifacts ({len(artifacts)} found)\n"]
+    response_parts = [f"## Museum Artifacts ({len(artifacts)} found)\n"]
     
     for i, artifact in enumerate(artifacts, 1):
         response_parts.append(f"\n### {i}. {artifact.get('title', 'Untitled')}")

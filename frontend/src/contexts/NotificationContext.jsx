@@ -23,7 +23,7 @@ export const NotificationProvider = ({ children }) => {
 
   const showInfo = (message) => {
     toast(message, {
-      icon: '💡',
+      icon: 'ℹ',
       style: {
         background: 'var(--primary-600)',
         color: 'var(--neutral-0)',
@@ -33,7 +33,7 @@ export const NotificationProvider = ({ children }) => {
 
   const showWarning = (message) => {
     toast(message, {
-      icon: '⚠️',
+      icon: '!',
       style: {
         background: 'var(--warning-500)',
         color: 'var(--neutral-0)',

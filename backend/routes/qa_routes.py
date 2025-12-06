@@ -46,7 +46,7 @@ async def get_ai_response(question):
     # Check if question is historical
     if not is_historical_question(question):
         return {
-            'response': "🏛️ I specialize in world history and historical topics. Please ask about historical events, figures, civilizations, wars, cultural movements, or historical places from any time period and region.",
+            'response': "I specialize in world history and historical topics. Please ask about historical events, figures, civilizations, wars, cultural movements, or historical places from any time period and region.",
             'source': 'filter',
             'wikipedia_info': None,
             'museum_data': None
@@ -157,7 +157,7 @@ def ask_question():
         return jsonify(response)
         
     except Exception as e:
-        print(f"❌ Question processing error: {str(e)}")
+        print(f"Question processing error: {str(e)}")
         return jsonify({'error': f'Failed to process question: {str(e)}'}), 500
 
 @qa_bp.route('/quick-facts/<topic>', methods=['GET'])

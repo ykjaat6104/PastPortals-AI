@@ -81,7 +81,7 @@ const ConfigModal = ({ isOpen, onClose }) => {
                     className="input-toggle"
                     onClick={() => setShowApiKey(!showApiKey)}
                   >
-                    {showApiKey ? '🙈' : '👁️'}
+                    {showApiKey ? 'Hide' : 'Show'}
                   </button>
                 </div>
               </div>

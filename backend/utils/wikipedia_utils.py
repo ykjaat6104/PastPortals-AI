@@ -42,7 +42,7 @@ def search_wikipedia(query, limit=3):
         return []
         
     except Exception as e:
-        print(f"❌ Wikipedia search error: {str(e)}")
+        print(f"Wikipedia search error: {str(e)}")
         return []
 
 def get_wikipedia_summary(title):
@@ -73,7 +73,7 @@ def get_wikipedia_summary(title):
         return None
         
     except Exception as e:
-        print(f"❌ Wikipedia summary error: {str(e)}")
+        print(f"Wikipedia summary error: {str(e)}")
         return None
 
 def get_wikipedia_page_content(title, sections=None):
@@ -113,7 +113,7 @@ def get_wikipedia_page_content(title, sections=None):
         return None
         
     except Exception as e:
-        print(f"❌ Wikipedia content error: {str(e)}")
+        print(f"Wikipedia content error: {str(e)}")
         return None
 
 def search_and_summarize(query):
@@ -140,7 +140,7 @@ def search_and_summarize(query):
         return summary
         
     except Exception as e:
-        print(f"❌ Wikipedia search and summarize error: {str(e)}")
+        print(f"Wikipedia search and summarize error: {str(e)}")
         return None
 
 def get_related_articles(title, limit=5):
@@ -180,5 +180,5 @@ def get_related_articles(title, limit=5):
         return []
         
     except Exception as e:
-        print(f"❌ Wikipedia related articles error: {str(e)}")
+        print(f"Wikipedia related articles error: {str(e)}")
         return []
