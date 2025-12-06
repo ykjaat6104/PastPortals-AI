@@ -18,13 +18,27 @@ api_key_configured = False
 def get_embeddings_model(model_name="sentence-transformers/all-mpnet-base-v2"):
     """Get cached embeddings model"""
     try:
-        return HuggingFaceEmbeddings(
+        import torch
+        # Clear any cached tensors
+        torch.cuda.empty_cache() if torch.cuda.is_available() else None
+        
+        model = HuggingFaceEmbeddings(
             model_name=model_name,
-            model_kwargs={'device': 'cpu'},
-            encode_kwargs={'normalize_embeddings': True}
+            model_kwargs={
+                'device': 'cpu',
+                'trust_remote_code': False
+            },
+            encode_kwargs={
+                'normalize_embeddings': True,
+                'batch_size': 32,
+                'show_progress_bar': False
+            }
         )
+        print(f"✅ Embeddings model loaded successfully")
+        return model
     except Exception as e:
-        print(f"❌ Failed to load embeddings model: {str(e)}")
+        print(f"⚠️ Embeddings model warning: {str(e)}")
+        print("📝 Note: App will still work using online sources")
         return None
 
 def setup_gemini(api_key, models_to_try=None):
