@@ -1,11 +1,9 @@
 """
 Vector database utilities for FAISS operations
 """
-import faiss
 import json
 import numpy as np
 import os
-from .ai_utils import get_embeddings_model
 
 def load_vector_db(index_path, text_map_path):
     """
@@ -19,6 +17,8 @@ def load_vector_db(index_path, text_map_path):
         tuple: (faiss_index, text_map) or (None, None) if error
     """
     try:
+        import faiss  # Lazy import
+        
         if not os.path.exists(index_path) or not os.path.exists(text_map_path):
             print(f"Vector database files not found")
             return None, None
@@ -49,6 +49,8 @@ def save_vector_db(index, text_map, index_path, text_map_path):
         bool: True if successful, False otherwise
     """
     try:
+        import faiss  # Lazy import
+        
         # Create directory if it doesn't exist
         os.makedirs(os.path.dirname(index_path), exist_ok=True)
         
@@ -76,6 +78,9 @@ def create_vector_db(texts, dimension=768):
         tuple: (faiss_index, text_map) or (None, None) if error
     """
     try:
+        import faiss  # Lazy import
+        from .ai_utils import get_embeddings_model
+        
         embeddings_model = get_embeddings_model()
         if not embeddings_model:
             return None, None
@@ -112,6 +117,8 @@ def add_to_vector_db(index, text_map, new_texts):
         tuple: (updated_index, updated_text_map)
     """
     try:
+        from .ai_utils import get_embeddings_model
+        
         embeddings_model = get_embeddings_model()
         if not embeddings_model:
             return index, text_map
@@ -152,6 +159,8 @@ def search_vector_db(query, index, text_map, k=3):
         list: List of relevant text contexts
     """
     try:
+        from .ai_utils import get_embeddings_model
+        
         if not index or not text_map or index.ntotal == 0:
             return []
         
